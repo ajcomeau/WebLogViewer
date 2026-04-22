@@ -53,7 +53,7 @@ namespace WebLogViewer
 
                             // Add as many columns as needed to the table.
                             while (dtLog.Columns.Count < columnCount)
-                                dtLog.Columns.Add("Col" + (dtLog.Columns.Count - 1).ToString());
+                                dtLog.Columns.Add("Col" + (dtLog.Columns.Count).ToString());
 
                             // Append each line to the table as an array object.
                             foreach (var line in lines) 
