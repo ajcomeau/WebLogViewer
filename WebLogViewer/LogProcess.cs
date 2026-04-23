@@ -27,9 +27,6 @@ namespace WebLogViewer
 
             try
             {
-                // Update event notification for form statusbar.
-                FileOp?.Invoke("Processing " + FileName);
-
                 if (File.Exists(FileName))
                 {
                     // Decompress file if needed and add files to list for processing.
@@ -45,6 +42,9 @@ namespace WebLogViewer
                     // and append rows.
                     foreach (String file in fileList)
                     {
+                        // Update event notification for form statusbar.
+                        FileOp?.Invoke("Processing " + file);
+
                         if (File.Exists(file) && file.EndsWith(".log", true, ci))
                         {
                             // Read lines from file, skip any that start with # (comments).
@@ -81,16 +81,19 @@ namespace WebLogViewer
 
             try
             {
-                // Iterate through directory looking for LOG, ZIP and GZ files.
-                foreach (String file in System.IO.Directory.EnumerateFiles(Directory))
+                if (System.IO.Directory.Exists(Directory))
                 {
-                    if (file.EndsWith(".ZIP", true, ci) || file.EndsWith(".GZ", true, ci) || file.EndsWith(".log", true, ci))
+                    // Iterate through directory looking for LOG, ZIP and GZ files.
+                    foreach (String file in System.IO.Directory.EnumerateFiles(Directory))
                     {
-                        // If there are no records so far, just load the file. Otherwise merge with current records.
-                        if (dtLog.Rows.Count == 0)
-                            dtLog = LoadFile(file, Decompress);
-                        else
-                            dtLog.Merge(LoadFile(file, Decompress));
+                        if (file.EndsWith(".ZIP", true, ci) || file.EndsWith(".GZ", true, ci) || file.EndsWith(".log", true, ci))
+                        {
+                            // If there are no records so far, just load the file. Otherwise merge with current records.
+                            if (dtLog.Rows.Count == 0)
+                                dtLog = LoadFile(file, Decompress);
+                            else
+                                dtLog.Merge(LoadFile(file, Decompress));
+                        }
                     }
                 }
             }
