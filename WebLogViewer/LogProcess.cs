@@ -16,6 +16,7 @@ namespace WebLogViewer
     static class LogProcess
     {
         public static CultureInfo ci = new CultureInfo("en-US");
+        public static event Action<string> FileOp;
 
         public static DataTable LoadFile(string FileName, bool Decompress)
         {
@@ -26,6 +27,9 @@ namespace WebLogViewer
 
             try
             {
+                // Update event notification for form statusbar.
+                FileOp?.Invoke("Processing " + FileName);
+
                 if (File.Exists(FileName))
                 {
                     // Decompress file if needed and add files to list for processing.

@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices.Marshalling;
 using System.Data;
+using System.Threading.Tasks;
 
 
 namespace WebLogViewer
@@ -59,11 +60,21 @@ namespace WebLogViewer
             }
         }
 
-        private void cmdLoad_Click(object sender, EventArgs e)
+        private async void cmdLoad_Click(object sender, EventArgs e)
         {
             try
             {
                 tssStatus.Text = "Loading log file(s) ...";
+
+                // Get event from LogProcess class for status bar update.
+                LogProcess.FileOp += (value) =>
+                {
+                    if (InvokeRequired)
+                        Invoke(new Action(() => tssStatus.Text = value));
+                    else
+                        tssStatus.Text = value;
+                };
+
                 tsStatus.Invalidate();
                 Application.DoEvents();
 
@@ -72,7 +83,7 @@ namespace WebLogViewer
                 if (rbFile.Checked)
                     addTable = LogProcess.LoadFile(txtFileName.Text, chkProcessZIP.Checked);
                 else
-                    addTable = LogProcess.LoadDirectory(txtFileName.Text, chkProcessZIP.Checked);
+                    addTable = await Task.Run(() => LogProcess.LoadDirectory(txtFileName.Text, chkProcessZIP.Checked));
 
                 // Get grid data source if this is an append.
                 if (chkAddToList.Checked && dgvLogs.DataSource != null)

@@ -104,7 +104,7 @@
             cmdLoad.TabIndex = 5;
             cmdLoad.Text = "Load";
             cmdLoad.UseVisualStyleBackColor = true;
-            cmdLoad.Click += cmdLoad_Click;
+            cmdLoad.Click += this.cmdLoad_Click;
             // 
             // chkProcessZIP
             // 
