@@ -46,22 +46,21 @@ namespace WebLogViewer
                     foreach (String file in fileList)
                     {
                         if (File.Exists(file) && file.EndsWith(".log", true, ci))
-                        {                            
+                        {
                             // Read lines from file, skip any that start with # (comments).
                             // Parse lines into fields 
-                            var lines = File.ReadAllLines(file).Where(line => !line.StartsWith("#"))
+                            var lines = File.ReadLines(file).Where(line => !line.StartsWith("#"))
                                 .Select(line => LogParse(line));
 
-                            // Get the number of fields in the longest list of the collection.
-                            columnCount = lines.MaxBy(list => list.Count).Count;
+                            columnCount = lines.First().Count;
 
-                            // Add as many columns as needed to the table.
+                            // Add necessary columns.
                             while (dtLog.Columns.Count < columnCount)
                                 dtLog.Columns.Add("Col" + (dtLog.Columns.Count).ToString());
 
                             // Append each line to the table as an array object.
-                            foreach (var line in lines) 
-                                dtLog.Rows.Add(line.ToArray());
+                            foreach (var line in lines)
+                                dtLog.Rows.Add(line.ToArray());                               
                         }
                     }
                 }

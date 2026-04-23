@@ -95,6 +95,7 @@ namespace WebLogViewer
                 else
                 {
                     // Otherwise, just put new table into data grid.
+                    dgvLogs.DataSource = null;
                     dgvLogs.DataSource = addTable;
                     tssStatus.Text = "Displaying " + addTable.Rows.Count.ToString() + " records.";
                 }
