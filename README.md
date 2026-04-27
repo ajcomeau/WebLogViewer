@@ -12,5 +12,10 @@ I am planning on adding features to output the grid to a CSV file or other forma
 Added event to LogProcess class to provide progress updates for multi-file directory import. The application was tested using my March 2026 website logs with over 1.2 million entries.
 
 See the first writeup for this project at https://www.andrewcomeau.com/programming/reviewing-csharp-parsing-web-logs/
+
+### Update 4/27/2026
+
+Export to XML added.
+
 -----
 ChatGPT was consulted for algorithms and best practices but this project does not use A.I. generated code.
