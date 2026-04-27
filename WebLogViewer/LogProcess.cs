@@ -174,7 +174,11 @@ namespace WebLogViewer
 
                     if (!escape)
                     {
-                        if (c != ' ') field += c;
+                        // Add character to string if not blank. Allow blanks inside brackets and quotes.
+                        if (c != ' ') 
+                            field += c;
+                        else if (brackets || quotes)
+                            field += c;
 
                         if (c == '"' && !brackets)  // Ignore quotes inside brackets.
                         {
