@@ -116,5 +116,42 @@ namespace WebLogViewer
 
 
         }
+
+        private void cmdXML_Click(object sender, EventArgs e)
+        {
+            DataTable dtSave = new DataTable();
+            string fileName = "";
+
+            try
+            {
+                if (dgvLogs.DataSource != null)
+                {
+                    SaveFileDialog fileDialog = new SaveFileDialog();
+                    fileDialog.Filter = "XML files (*.xml)|*.xml";
+
+                    if (fileDialog.ShowDialog() == DialogResult.OK)
+                        fileName = fileDialog.FileName;
+
+                    dtSave = (DataTable)dgvLogs.DataSource;
+                    dtSave.TableName = "LogData";
+                    dtSave.WriteXml(fileName);
+
+                    MessageBox.Show("File saved to :" + fileName);
+                }
+                else
+                {
+                    MessageBox.Show("No data is available to export. Please load log files before attempting to export to XML.", "No data loaded ...");
+                }
+            }
+            catch (Exception ex)
+            {
+                {
+                    MessageBox.Show(ex.Message, "Error ...");
+                    tssStatus.Text = " ";
+                }
+
+            }
+
+        }
     }
 }

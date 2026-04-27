@@ -41,6 +41,7 @@
             tsStatus = new ToolStripStatusLabel();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             tssStatus = new ToolStripStatusLabel();
+            cmdXML = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             statusMain.SuspendLayout();
@@ -134,13 +135,13 @@
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLogs.Location = new Point(12, 98);
             dgvLogs.Name = "dgvLogs";
-            dgvLogs.Size = new Size(744, 314);
+            dgvLogs.Size = new Size(744, 315);
             dgvLogs.TabIndex = 8;
             // 
             // statusMain
             // 
             statusMain.Items.AddRange(new ToolStripItem[] { tsStatus, toolStripStatusLabel1, tssStatus });
-            statusMain.Location = new Point(0, 428);
+            statusMain.Location = new Point(0, 454);
             statusMain.Name = "statusMain";
             statusMain.Size = new Size(784, 22);
             statusMain.TabIndex = 9;
@@ -162,11 +163,22 @@
             tssStatus.Size = new Size(10, 17);
             tssStatus.Text = " ";
             // 
+            // cmdXML
+            // 
+            cmdXML.Location = new Point(649, 419);
+            cmdXML.Name = "cmdXML";
+            cmdXML.Size = new Size(107, 23);
+            cmdXML.TabIndex = 10;
+            cmdXML.Text = "Export to XML";
+            cmdXML.UseVisualStyleBackColor = true;
+            cmdXML.Click += cmdXML_Click;
+            // 
             // formMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 450);
+            ClientSize = new Size(784, 476);
+            Controls.Add(cmdXML);
             Controls.Add(statusMain);
             Controls.Add(dgvLogs);
             Controls.Add(chkAddToList);
@@ -201,5 +213,6 @@
         private ToolStripStatusLabel tsStatus;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel tssStatus;
+        private Button cmdXML;
     }
 }
