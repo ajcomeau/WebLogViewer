@@ -165,6 +165,7 @@
             // 
             // cmdXML
             // 
+            cmdXML.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             cmdXML.Location = new Point(649, 419);
             cmdXML.Name = "cmdXML";
             cmdXML.Size = new Size(107, 23);
