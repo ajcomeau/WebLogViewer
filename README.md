@@ -17,5 +17,11 @@ See the first writeup for this project at https://www.andrewcomeau.com/programmi
 
 Export to XML added.
 
+### Update 4/28/2026
+
+Export to SQLite added. Data can be exported to specified table in selected SQLite database.
+Fixed error caused by extra columns in subsequent files.
+Added some UI help text.
+
 -----
 ChatGPT was consulted for algorithms and best practices but this project does not use A.I. generated code.
