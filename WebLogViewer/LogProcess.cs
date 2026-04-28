@@ -16,7 +16,7 @@ namespace WebLogViewer
     static class LogProcess
     {
         public static CultureInfo ci = new CultureInfo("en-US");
-        public static event Action<string> FileOp;
+        public static event Action<string>? FileOp;
 
         public static DataTable LoadFile(string FileName, bool Decompress)
         {
@@ -63,7 +63,7 @@ namespace WebLogViewer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }          
@@ -95,7 +95,7 @@ namespace WebLogViewer
                     }
                 }
             }
-            catch (Exception e) 
+            catch (Exception) 
             {
                 throw;
             }
@@ -141,7 +141,7 @@ namespace WebLogViewer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -204,7 +204,7 @@ namespace WebLogViewer
                     if (escape && c != '\\') escape = false;  // End escape mode.
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

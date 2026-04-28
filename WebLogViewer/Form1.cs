@@ -10,9 +10,6 @@ namespace WebLogViewer
 {
     public partial class formMain : Form
     {
-        DataTable logTable = new DataTable();
-        DataTable addTable = new DataTable();
-
         public formMain()
         {
             InitializeComponent();
@@ -65,6 +62,8 @@ namespace WebLogViewer
 
         private async void cmdLoad_Click(object sender, EventArgs e)
         {
+            DataTable addTable;
+
             try
             {
                 tssStatus.Text = "Loading log file(s) ...";
@@ -82,6 +81,7 @@ namespace WebLogViewer
                 Application.DoEvents();
 
                 cmdLoad.Enabled = false;
+
                 // Single file or directory?
                 if (rbFile.Checked)
                     addTable = LogProcess.LoadFile(txtFileName.Text, chkProcessZIP.Checked);
@@ -91,7 +91,7 @@ namespace WebLogViewer
                 // Get grid data source if this is an append.
                 if (chkAddToList.Checked && dgvLogs.DataSource != null)
                 {
-                    logTable = (DataTable)dgvLogs.DataSource;
+                    using DataTable logTable = (DataTable)dgvLogs.DataSource;
                     logTable.Merge(addTable);
                     dgvLogs.DataSource = logTable;
                 }
@@ -115,14 +115,10 @@ namespace WebLogViewer
             {
                 cmdLoad.Enabled = true;
             }
-
-
-
         }
 
         private void cmdXML_Click(object sender, EventArgs e)
         {
-            DataTable dtSave = new DataTable();
             string fileName = "";
 
             try
@@ -137,7 +133,7 @@ namespace WebLogViewer
                     if (fileDialog.ShowDialog() == DialogResult.OK)
                         fileName = fileDialog.FileName;
 
-                    dtSave = (DataTable)dgvLogs.DataSource;
+                    using DataTable dtSave = (DataTable)dgvLogs.DataSource;
                     dtSave.TableName = "LogData";
                     dtSave.WriteXml(fileName);
 
@@ -160,11 +156,7 @@ namespace WebLogViewer
 
         private void cmdSQLite_Click(object sender, EventArgs e)
         {
-            DataTable dtSave = new DataTable();
             string fileName = "";
-            SqliteConnection connSQL;
-            SqliteCommand cmdSQL;
-            SqliteTransaction transSQL;
             String connString, columnDefs, columnList, paramList, tableName;
             int RowCount = 0;
 
@@ -185,14 +177,14 @@ namespace WebLogViewer
                     tableName = (txtTableName.Text.Length > 0) ? txtTableName.Text : "LogData";
 
                     // Get current data from grid.
-                    dtSave = (DataTable)dgvLogs.DataSource;
+                    using DataTable dtSave = (DataTable)dgvLogs.DataSource;
                     dtSave.TableName = tableName;
 
                     // SQLite connection and command
                     connString = $"Data Source = {fileName}";
-                    connSQL = new SqliteConnection(connString);
+                    using SqliteConnection connSQL = new SqliteConnection(connString);
                     connSQL.Open();
-                    cmdSQL = connSQL.CreateCommand();
+                    using SqliteCommand cmdSQL = connSQL.CreateCommand();
 
                     // Create columns and parameters from datatable.
                     columnDefs = string.Join(", ", dtSave.Columns.Cast<DataColumn>().Select(c => $"[{c.ColumnName}] TEXT"));
@@ -205,7 +197,7 @@ namespace WebLogViewer
 
                     // Create INSERT command and transaction.
                     cmdSQL.CommandText = $"INSERT INTO [{dtSave.TableName}] ({columnList}) VALUES ({paramList})";
-                    transSQL = connSQL.BeginTransaction();
+                    using SqliteTransaction transSQL = connSQL.BeginTransaction();
                     cmdSQL.Transaction = transSQL;
 
                     // Setup parameters
