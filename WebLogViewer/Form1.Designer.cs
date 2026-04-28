@@ -47,6 +47,7 @@
             txtTableName = new TextBox();
             lblTableName = new Label();
             tipHelpText = new ToolTip(components);
+            btnClear = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             statusMain.SuspendLayout();
@@ -218,11 +219,23 @@
             lblTableName.TabIndex = 13;
             lblTableName.Text = "Enter name for exported table:";
             // 
+            // btnClear
+            // 
+            btnClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnClear.Location = new Point(12, 444);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(75, 23);
+            btnClear.TabIndex = 14;
+            btnClear.Text = "Clear Grid";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
             // formMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(854, 501);
+            Controls.Add(btnClear);
             Controls.Add(lblTableName);
             Controls.Add(txtTableName);
             Controls.Add(cmdSQLite);
@@ -266,5 +279,6 @@
         private TextBox txtTableName;
         private Label lblTableName;
         private ToolTip tipHelpText;
+        private Button btnClear;
     }
 }

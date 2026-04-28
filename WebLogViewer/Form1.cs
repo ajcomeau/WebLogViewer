@@ -238,5 +238,19 @@ namespace WebLogViewer
             finally { cmdSQLite.Enabled = true; }
 
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            // Clear the current records from the grid.
+
+            DialogResult drVerify = MessageBox.Show("Are you sure you want to clear these log entries?", "Clear entries ...?", MessageBoxButtons.YesNo);
+
+            if (drVerify == DialogResult.Yes)
+            {
+                dgvLogs.DataSource = null;
+                dgvLogs.Invalidate();
+            }
+
+        }
     }
 }
