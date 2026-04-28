@@ -23,7 +23,6 @@ namespace WebLogViewer
             // If file ends with ZIP for GZ, decompress to LOG.
             DataTable dtLog = new DataTable();
             List<String> fileList = new List<String>();
-            int columnCount = 0;
 
             try
             {
@@ -52,15 +51,14 @@ namespace WebLogViewer
                             var lines = File.ReadLines(file).Where(line => !line.StartsWith("#"))
                                 .Select(line => LogParse(line));
 
-                            columnCount = lines.First().Count;
-
-                            // Add necessary columns.
-                            while (dtLog.Columns.Count < columnCount)
-                                dtLog.Columns.Add("Col" + (dtLog.Columns.Count).ToString());
-
                             // Append each line to the table as an array object.
-                            foreach (var line in lines)
-                                dtLog.Rows.Add(line.ToArray());                               
+                            // Add columns when necessary.
+                            foreach (var line in lines) { 
+                                while (dtLog.Columns.Count < line.Count())
+                                    dtLog.Columns.Add("Col" + (dtLog.Columns.Count).ToString());
+
+                                dtLog.Rows.Add(line.ToArray());
+                            }
                         }
                     }
                 }

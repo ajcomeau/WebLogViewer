@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panel1 = new Panel();
             rbDirectory = new RadioButton();
             rbFile = new RadioButton();
@@ -42,6 +43,10 @@
             toolStripStatusLabel1 = new ToolStripStatusLabel();
             tssStatus = new ToolStripStatusLabel();
             cmdXML = new Button();
+            cmdSQLite = new Button();
+            txtTableName = new TextBox();
+            lblTableName = new Label();
+            tipHelpText = new ToolTip(components);
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvLogs).BeginInit();
             statusMain.SuspendLayout();
@@ -65,6 +70,7 @@
             rbDirectory.TabIndex = 1;
             rbDirectory.TabStop = true;
             rbDirectory.Text = "Import Directory";
+            tipHelpText.SetToolTip(rbDirectory, "Import contents of a directory.");
             rbDirectory.UseVisualStyleBackColor = true;
             rbDirectory.CheckedChanged += rbDirectory_CheckedChanged;
             // 
@@ -77,6 +83,7 @@
             rbFile.TabIndex = 0;
             rbFile.TabStop = true;
             rbFile.Text = "Import File";
+            tipHelpText.SetToolTip(rbFile, "Select single file for import.");
             rbFile.UseVisualStyleBackColor = true;
             rbFile.CheckedChanged += rbFile_CheckedChanged;
             // 
@@ -94,6 +101,7 @@
             cmdBrowse.Size = new Size(75, 23);
             cmdBrowse.TabIndex = 4;
             cmdBrowse.Text = "Browse";
+            tipHelpText.SetToolTip(cmdBrowse, "Search for directory or file.");
             cmdBrowse.UseVisualStyleBackColor = true;
             cmdBrowse.Click += cmdBrowse_Click;
             // 
@@ -104,6 +112,7 @@
             cmdLoad.Size = new Size(75, 23);
             cmdLoad.TabIndex = 5;
             cmdLoad.Text = "Load";
+            tipHelpText.SetToolTip(cmdLoad, "Load specified files into the form's grid for review.");
             cmdLoad.UseVisualStyleBackColor = true;
             cmdLoad.Click += cmdLoad_Click;
             // 
@@ -117,6 +126,7 @@
             chkProcessZIP.Size = new Size(157, 19);
             chkProcessZIP.TabIndex = 6;
             chkProcessZIP.Text = "Process compressed files";
+            tipHelpText.SetToolTip(chkProcessZIP, "When checked, any ZIP or GZ files specified will be extracted and the log files will be imported.");
             chkProcessZIP.UseVisualStyleBackColor = true;
             // 
             // chkAddToList
@@ -127,6 +137,7 @@
             chkAddToList.Size = new Size(163, 19);
             chkAddToList.TabIndex = 7;
             chkAddToList.Text = "Add records to current list";
+            tipHelpText.SetToolTip(chkAddToList, "Append specified files to currently displayed entries.");
             chkAddToList.UseVisualStyleBackColor = true;
             // 
             // dgvLogs
@@ -135,15 +146,15 @@
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLogs.Location = new Point(12, 98);
             dgvLogs.Name = "dgvLogs";
-            dgvLogs.Size = new Size(744, 315);
+            dgvLogs.Size = new Size(814, 340);
             dgvLogs.TabIndex = 8;
             // 
             // statusMain
             // 
             statusMain.Items.AddRange(new ToolStripItem[] { tsStatus, toolStripStatusLabel1, tssStatus });
-            statusMain.Location = new Point(0, 454);
+            statusMain.Location = new Point(0, 479);
             statusMain.Name = "statusMain";
-            statusMain.Size = new Size(784, 22);
+            statusMain.Size = new Size(854, 22);
             statusMain.TabIndex = 9;
             statusMain.Text = "statusStrip1";
             // 
@@ -166,19 +177,55 @@
             // cmdXML
             // 
             cmdXML.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cmdXML.Location = new Point(649, 419);
+            cmdXML.Location = new Point(719, 444);
             cmdXML.Name = "cmdXML";
             cmdXML.Size = new Size(107, 23);
             cmdXML.TabIndex = 10;
             cmdXML.Text = "Export to XML";
+            tipHelpText.SetToolTip(cmdXML, "Export displayed data to an XML file.");
             cmdXML.UseVisualStyleBackColor = true;
             cmdXML.Click += cmdXML_Click;
+            // 
+            // cmdSQLite
+            // 
+            cmdSQLite.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            cmdSQLite.Location = new Point(593, 444);
+            cmdSQLite.Name = "cmdSQLite";
+            cmdSQLite.Size = new Size(120, 23);
+            cmdSQLite.TabIndex = 11;
+            cmdSQLite.Text = "Export to SQLite";
+            tipHelpText.SetToolTip(cmdSQLite, "Export displayed data to a SQLite database file.");
+            cmdSQLite.UseVisualStyleBackColor = true;
+            cmdSQLite.Click += cmdSQLite_Click;
+            // 
+            // txtTableName
+            // 
+            txtTableName.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            txtTableName.Location = new Point(433, 445);
+            txtTableName.Name = "txtTableName";
+            txtTableName.Size = new Size(154, 23);
+            txtTableName.TabIndex = 12;
+            txtTableName.Text = "LogData";
+            tipHelpText.SetToolTip(txtTableName, "Enter a name for the export table or accept the default of 'LogData'.");
+            // 
+            // lblTableName
+            // 
+            lblTableName.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            lblTableName.AutoSize = true;
+            lblTableName.Location = new Point(261, 448);
+            lblTableName.Name = "lblTableName";
+            lblTableName.Size = new Size(166, 15);
+            lblTableName.TabIndex = 13;
+            lblTableName.Text = "Enter name for exported table:";
             // 
             // formMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 476);
+            ClientSize = new Size(854, 501);
+            Controls.Add(lblTableName);
+            Controls.Add(txtTableName);
+            Controls.Add(cmdSQLite);
             Controls.Add(cmdXML);
             Controls.Add(statusMain);
             Controls.Add(dgvLogs);
@@ -215,5 +262,9 @@
         private ToolStripStatusLabel toolStripStatusLabel1;
         private ToolStripStatusLabel tssStatus;
         private Button cmdXML;
+        private Button cmdSQLite;
+        private TextBox txtTableName;
+        private Label lblTableName;
+        private ToolTip tipHelpText;
     }
 }
