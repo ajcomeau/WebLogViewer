@@ -13,6 +13,8 @@ Added event to LogProcess class to provide progress updates for multi-file direc
 
 See the first writeup for this project at https://www.andrewcomeau.com/programming/reviewing-csharp-parsing-web-logs/
 
+See demo video on YouTube: https://youtu.be/XUtZouYCq7M
+
 ### Update 4/27/2026
 
 Export to XML added.
