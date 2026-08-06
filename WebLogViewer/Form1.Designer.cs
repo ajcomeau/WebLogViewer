@@ -147,15 +147,15 @@
             dgvLogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLogs.Location = new Point(12, 98);
             dgvLogs.Name = "dgvLogs";
-            dgvLogs.Size = new Size(814, 340);
+            dgvLogs.Size = new Size(736, 320);
             dgvLogs.TabIndex = 8;
             // 
             // statusMain
             // 
             statusMain.Items.AddRange(new ToolStripItem[] { tsStatus, toolStripStatusLabel1, tssStatus });
-            statusMain.Location = new Point(0, 479);
+            statusMain.Location = new Point(0, 459);
             statusMain.Name = "statusMain";
-            statusMain.Size = new Size(854, 22);
+            statusMain.Size = new Size(776, 22);
             statusMain.TabIndex = 9;
             statusMain.Text = "statusStrip1";
             // 
@@ -178,7 +178,7 @@
             // cmdXML
             // 
             cmdXML.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cmdXML.Location = new Point(719, 444);
+            cmdXML.Location = new Point(641, 424);
             cmdXML.Name = "cmdXML";
             cmdXML.Size = new Size(107, 23);
             cmdXML.TabIndex = 10;
@@ -190,7 +190,7 @@
             // cmdSQLite
             // 
             cmdSQLite.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            cmdSQLite.Location = new Point(593, 444);
+            cmdSQLite.Location = new Point(515, 424);
             cmdSQLite.Name = "cmdSQLite";
             cmdSQLite.Size = new Size(120, 23);
             cmdSQLite.TabIndex = 11;
@@ -202,7 +202,7 @@
             // txtTableName
             // 
             txtTableName.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            txtTableName.Location = new Point(433, 445);
+            txtTableName.Location = new Point(355, 425);
             txtTableName.Name = "txtTableName";
             txtTableName.Size = new Size(154, 23);
             txtTableName.TabIndex = 12;
@@ -213,7 +213,7 @@
             // 
             lblTableName.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lblTableName.AutoSize = true;
-            lblTableName.Location = new Point(261, 448);
+            lblTableName.Location = new Point(183, 428);
             lblTableName.Name = "lblTableName";
             lblTableName.Size = new Size(166, 15);
             lblTableName.TabIndex = 13;
@@ -222,7 +222,7 @@
             // btnClear
             // 
             btnClear.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnClear.Location = new Point(12, 444);
+            btnClear.Location = new Point(12, 424);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(75, 23);
             btnClear.TabIndex = 14;
@@ -234,7 +234,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(854, 501);
+            ClientSize = new Size(776, 481);
             Controls.Add(btnClear);
             Controls.Add(lblTableName);
             Controls.Add(txtTableName);
